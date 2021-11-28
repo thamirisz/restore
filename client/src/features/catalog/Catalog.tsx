@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
@@ -15,7 +14,6 @@ export default function Catalog() {
   return (
     <>
       <ProductList products={products} />
-      <Button variant="contained">Add Product</Button>
     </>
   );
 }
