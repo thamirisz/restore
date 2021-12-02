@@ -51,7 +51,7 @@ namespace API
             // app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(opt => opt.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(opt => opt.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseAuthorization();
 
