@@ -23,6 +23,7 @@ namespace API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public IConfiguration Configuration { get; }

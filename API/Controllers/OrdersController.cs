@@ -26,9 +26,9 @@ namespace API.Controllers
         public async Task<ActionResult<List<OrderDto>>> GetOrders()
         {
             return await _context.Orders
-                .ProjectOrderToOrderDto()
-                .Where(o => o.BuyerId == User.Identity.Name)
-                .ToListAsync();
+               .ProjectOrderToOrderDto()
+               .Where(x => x.BuyerId == User.Identity.Name)
+               .ToListAsync();
         }
 
         [HttpGet("{id}", Name = "GetOrder")]
@@ -36,7 +36,7 @@ namespace API.Controllers
         {
             return await _context.Orders
                 .ProjectOrderToOrderDto()
-                .Where(o => o.BuyerId == User.Identity.Name && o.Id == id)
+                .Where(x => x.BuyerId == User.Identity.Name && x.Id == id)
                 .FirstOrDefaultAsync();
         }
 
@@ -60,6 +60,7 @@ namespace API.Controllers
                     Name = productItem.Name,
                     PictureUrl = productItem.PictureUrl
                 };
+
                 var orderItem = new OrderItem
                 {
                     ItemOrdered = itemOrdered,
@@ -89,8 +90,8 @@ namespace API.Controllers
             if (orderDto.SaveAddress)
             {
                 var user = await _context.Users
-                                .Include(u => u.Address)
-                                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+                    .Include(a => a.Address)
+                    .FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
 
                 var address = new UserAddress
                 {
@@ -100,7 +101,7 @@ namespace API.Controllers
                     City = orderDto.ShippingAddress.City,
                     State = orderDto.ShippingAddress.State,
                     Zip = orderDto.ShippingAddress.Zip,
-                    Country = orderDto.ShippingAddress.Country,
+                    Country = orderDto.ShippingAddress.Country
                 };
                 user.Address = address;
             }
@@ -109,7 +110,7 @@ namespace API.Controllers
 
             if (result) return CreatedAtRoute("GetOrder", new { id = order.Id }, order.Id);
 
-            return BadRequest("Problem creating order");
+            return BadRequest(new ProblemDetails { Title = "Problem creating order" });
         }
     }
 }
