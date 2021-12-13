@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
-
 namespace API.DTOs
 {
     public class CreateProductDto

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using API.Entities.OrderAggregate;
-
 namespace API.DTOs
 {
     public class OrderDto
